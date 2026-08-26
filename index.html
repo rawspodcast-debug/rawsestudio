@@ -203,8 +203,8 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
 .showcase h2{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3.6vw,32px);letter-spacing:-.5px;}
 .showcase p{color:var(--muted);margin:10px auto 24px;max-width:520px;}
 .logos{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:26px;}
-.logos .slot{width:132px;height:64px;border:1px dashed rgba(174,196,240,.35);border-radius:12px;
-  display:flex;align-items:center;justify-content:center;color:var(--muted-2);font-family:var(--mono);font-size:12px;}
+.logos .slot{width:132px;height:64px;border-radius:12px;border:1px solid rgba(174,196,240,.18);
+  object-fit:cover;background:#000;}
 
 /* ecosystem */
 .eco{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
@@ -417,7 +417,10 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
       <h2 style="margin-top:12px;">Seu canal aparece aqui.</h2>
       <p>Empresas e profissionais de Joinville e região que transformaram 1 hora de estúdio em presença digital.</p>
       <div class="logos">
-        <div class="slot">seu canal</div><div class="slot">seu canal</div><div class="slot">seu canal</div><div class="slot">seu canal</div>
+        <img class="slot" src="assets/pod6.png" alt="RAWS Podcast">
+        <img class="slot" src="assets/pod2.png" alt="VirtuosasCast">
+        <img class="slot" src="assets/pod7.png" alt="Chama PX Podcast">
+        <img class="slot" src="assets/pod1.png" alt="PapoCon Podcast">
       </div>
       <a class="btn btn-primary" data-wa="Olá! Quero gravar e colocar meu canal no ar com o RAWS.">Quero gravar →</a>
     </div>
