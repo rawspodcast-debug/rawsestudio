@@ -146,14 +146,30 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
 .step p{color:var(--muted);font-size:15px;}
 
 /* conditions */
-.cond{display:grid;grid-template-columns:1fr;gap:12px;}
-@media(min-width:640px){.cond{grid-template-columns:1fr 1fr;}}
-.cond li{list-style:none;display:flex;gap:13px;align-items:flex-start;background:var(--card);
-  border:1px solid var(--card-brd);border-radius:14px;padding:18px 20px;}
-.cond .ic{width:26px;height:26px;flex:none;color:var(--blue);background:var(--yellow);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--disp);}
-.cond .t{font-weight:600;font-size:15.5px;}
-.cond .d{color:var(--muted);font-size:14px;}
+.condwrap{display:grid;grid-template-columns:1fr;gap:30px;}
+@media(min-width:860px){.condwrap{grid-template-columns:1.05fr .95fr;align-items:stretch;gap:40px;}}
+.condp{color:var(--muted);font-size:17px;margin-top:12px;max-width:480px;}
+
+.paylist{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;list-style:none;}
+.paylist li{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--card-brd);
+  border-radius:14px;padding:14px 18px;font-weight:600;font-size:15px;}
+.paylist .ic2{width:30px;height:30px;flex:none;color:var(--blue);background:var(--yellow);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;}
+.paylist .ic2 svg{width:16px;height:16px;}
+
+.foot-note{margin-top:18px;color:var(--muted);font-size:14px;display:flex;gap:8px;align-items:flex-start;}
+
+.paycard{background:var(--navy);border-radius:22px;padding:32px 30px;display:flex;flex-direction:column;
+  border:1px solid rgba(174,196,240,.12);}
+.paycard h3{font-family:var(--disp);font-weight:700;font-size:clamp(19px,2.6vw,23px);margin:8px 0 6px;line-height:1.25;}
+.paycard .prow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;
+  border-bottom:1px solid rgba(174,196,240,.14);font-size:15px;color:var(--muted);}
+.paycard .prow .neg{color:var(--yellow);}
+.paycard .prow.total{border-bottom:none;padding-top:18px;}
+.paycard .prow.total span:first-child{color:var(--ink);font-weight:700;font-size:16px;}
+.paycard .prow.total .v{font-family:var(--disp);font-weight:800;font-size:28px;color:var(--yellow);}
+.paycard .btn{width:100%;justify-content:center;margin-top:22px;}
+.paycard .fine{font-size:12.5px;color:var(--muted-2);margin-top:10px;text-align:center;}
 
 /* two-up cards (temporada + recurring) */
 .duo{display:grid;grid-template-columns:1fr;gap:18px;}
@@ -335,16 +351,27 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
 <!-- ===================== CONDIÇÕES ===================== -->
 <section class="sec" style="padding-top:0;">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow"><span class="tick"><i></i><i></i><i></i><i></i></span>Condições e pagamento</div>
-      <h2>Tudo transparente antes de você fechar.</h2>
+    <div class="condwrap">
+      <div>
+        <div class="eyebrow"><span class="tick"><i></i><i></i><i></i><i></i></span>Condições</div>
+        <h2>Pacotes com 10% de desconto parcelado em 2x</h2>
+        <p class="condp">A partir de 5 episódios, você fecha um pacote e parcela em 2x com 10% de desconto. Mais constância pro seu canal, menos custo por gravação.</p>
+        <ul class="paylist">
+          <li><span class="ic2"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="7" height="7" rx="1.5"/><rect x="15" y="2" width="7" height="7" rx="1.5"/><rect x="2" y="15" width="7" height="7" rx="1.5"/><rect x="12" y="13" width="4" height="4" rx="1"/><rect x="17" y="13" width="5" height="4" rx="1"/><rect x="12" y="18" width="4" height="4" rx="1"/><rect x="17" y="18" width="5" height="4" rx="1"/></svg></span>Pix</li>
+          <li><span class="ic2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 9.5h20" stroke-width="3"/><path d="M5 15h4" stroke-linecap="round"/></svg></span>Cartão de crédito</li>
+        </ul>
+        <div class="foot-note">👥 Até 4 pessoas na bancada — traga convidados e grave em grupo.</div>
+      </div>
+      <div class="paycard">
+        <div class="eyebrow">Exemplo real</div>
+        <h3>Pacote de 5 episódios — Plano Presença</h3>
+        <div class="prow"><span>5 × R$ 520</span><span>R$ 2.600</span></div>
+        <div class="prow"><span>Desconto parcelado 2x (10%)</span><span class="neg">− R$ 260</span></div>
+        <div class="prow total"><span>Total do pacote</span><span class="v">R$ 2.340</span></div>
+        <a class="btn btn-primary" data-wa="Olá! Quero montar um pacote de 5 episódios do plano Presença, com o desconto de 10% parcelado em 2x.">Quero montar meu pacote →</a>
+        <p class="fine">50% do valor garante sua data na agenda.</p>
+      </div>
     </div>
-    <ul class="cond">
-      <li><div class="ic">%</div><div><div class="t">10% de desconto</div><div class="d">Em pacotes parcelados em 2x, a partir de 5 episódios.</div></div></li>
-      <li><div class="ic">$</div><div><div class="t">Pix ou cartão de crédito</div><div class="d">Você escolhe a forma que preferir.</div></div></li>
-      <li><div class="ic">4</div><div><div class="t">Até 4 pessoas na bancada</div><div class="d">Traga convidados e grave em grupo.</div></div></li>
-      <li><div class="ic">✓</div><div><div class="t">50% pra reservar a data</div><div class="d">Pagamento antecipado garante seu horário na agenda.</div></div></li>
-    </ul>
   </div>
 </section>
 
