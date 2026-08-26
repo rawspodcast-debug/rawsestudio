@@ -157,8 +157,10 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
 
 /* two-up cards (temporada + recurring) */
 .duo{display:grid;grid-template-columns:1fr;gap:18px;}
-@media(min-width:820px){.duo{grid-template-columns:1.15fr .85fr;}}
+@media(min-width:820px){.duo{grid-template-columns:1fr 1fr;align-items:stretch;}}
 .panel{border-radius:22px;padding:32px 30px;border:1px solid var(--card-brd);background:var(--card);}
+.mug-art{border-radius:22px;border:1px solid var(--card-brd);background:var(--card);min-height:260px;overflow:hidden;}
+.mug-art img{width:100%;height:100%;object-fit:cover;display:block;}
 .panel.gold{background:linear-gradient(155deg,rgba(255,204,0,.16),rgba(255,204,0,.02));border:1.5px solid var(--yellow);}
 .panel .tagline{font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--yellow);}
 .panel h3{font-family:var(--disp);font-weight:700;font-size:clamp(23px,3.2vw,30px);letter-spacing:-.5px;margin:10px 0 12px;line-height:1.1;}
@@ -271,7 +273,7 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
         <a class="btn btn-primary" data-wa="Olá! Vim pelo site do RAWS e quero agendar minha data de gravação.">Agende sua data →</a>
         <a class="btn btn-ghost" data-wa="Olá! Vim pelo site do RAWS e queria tirar algumas dúvidas.">Fale com um humano</a>
       </div>
-      <div class="trust"><span class="dot"></span> Atendemos 1 cliente por dia, de segunda a sexta. Agenda limitada.</div>
+      <div class="trust"><span class="dot"></span> Agenda limitada.</div>
     </div>
 
     <!-- [ EDITAR PREÇOS/CORTES AQUI ] -->
@@ -350,18 +352,6 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
 <section class="sec" style="padding-top:0;">
   <div class="wrap">
     <div class="duo">
-      <div class="panel gold">
-        <div class="tagline">Plano recorrente · gestão de canal</div>
-        <h3>Não quer só gravar? A gente cuida do seu canal.</h3>
-        <p>Você grava, a gente publica e mantém suas redes vivas toda semana.</p>
-        <ul>
-          <li>Gestão do YouTube: capa, título, descrição e agendamento dos vídeos</li>
-          <li>2 cortes por semana no Instagram, com legenda pronta</li>
-          <li>12 episódios por trimestre (1 por semana)</li>
-        </ul>
-        <div class="price-lg">R$2.200<small> /mês · mínimo 3 meses</small></div>
-        <a class="btn btn-primary" data-wa="Olá! Tenho interesse no plano recorrente de gestão de canal (R$2.200/mês).">Quero um plano recorrente →</a>
-      </div>
       <div class="panel">
         <div class="tagline">Brinde de temporada</div>
         <h3>Feche uma temporada, leve 2 canecas com o seu logo.</h3>
@@ -369,6 +359,73 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
         <div class="price-lg" style="font-size:26px;">Caneca RAWS <small>· avulsa R$38,00</small></div>
         <p class="fine">Um mimo pra fechar a temporada com a cara da sua marca.</p>
         <a class="btn btn-ghost" data-wa="Olá! Quero fechar uma temporada e saber sobre as canecas personalizadas.">Quero fechar temporada</a>
+      </div>
+      <div class="mug-art" aria-hidden="true">
+        <svg viewBox="0 0 520 520" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="mugBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#0A2E7A"/>
+              <stop offset="55%" stop-color="#061C52"/>
+              <stop offset="100%" stop-color="#03113A"/>
+            </linearGradient>
+            <radialGradient id="mugGlow" cx="80%" cy="8%" r="65%">
+              <stop offset="0" stop-color="#FFCC00" stop-opacity=".22"/>
+              <stop offset="100%" stop-color="#FFCC00" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="mugBody" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#FFFFFF"/>
+              <stop offset="55%" stop-color="#F2EFE8"/>
+              <stop offset="100%" stop-color="#D9D5C9"/>
+            </linearGradient>
+            <filter id="mugSoft" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6"/>
+            </filter>
+            <symbol id="mugShape" viewBox="0 0 130 140">
+              <path d="M96 46 C120 46 120 96 96 96" fill="none" stroke="url(#mugBody)" stroke-width="11" stroke-linecap="round"/>
+              <rect x="12" y="26" width="82" height="104" rx="12" fill="url(#mugBody)"/>
+              <ellipse cx="53" cy="26" rx="41" ry="10" fill="#03113A" opacity=".5"/>
+              <ellipse cx="53" cy="26" rx="41" ry="10" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+              <g fill="#FFCC00">
+                <rect x="32" y="60" width="6" height="16" rx="3"/>
+                <rect x="42" y="52" width="6" height="32" rx="3"/>
+                <rect x="52" y="58" width="6" height="20" rx="3"/>
+                <rect x="62" y="48" width="6" height="40" rx="3"/>
+              </g>
+              <text x="53" y="106" text-anchor="middle" font-family="'DM Mono',ui-monospace,monospace" font-size="13" letter-spacing="2" fill="#FFCC00" font-weight="600">RAWS</text>
+            </symbol>
+          </defs>
+
+          <rect width="520" height="520" fill="url(#mugBg)"/>
+          <circle cx="420" cy="60" r="260" fill="url(#mugGlow)"/>
+
+          <!-- estúdio: painéis acústicos e boom de microfone, bem sutis -->
+          <g opacity=".14">
+            <rect x="18" y="30" width="16" height="330" rx="8" fill="#7FE0D0"/>
+            <rect x="46" y="60" width="16" height="270" rx="8" fill="#7FE0D0"/>
+          </g>
+          <g opacity=".16" stroke="#C0CEEE" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M360 38 L466 88"/>
+            <circle cx="466" cy="88" r="15" fill="#03113A" stroke="#C0CEEE"/>
+          </g>
+          <circle cx="472" cy="38" r="5" fill="#FF5C5C" opacity=".7"/>
+          <circle cx="472" cy="38" r="11" fill="#FF5C5C" opacity=".16"/>
+
+          <!-- mesa do estúdio -->
+          <rect x="0" y="380" width="520" height="140" fill="#03113A"/>
+          <rect x="0" y="378" width="520" height="3" fill="#FFCC00" opacity=".35"/>
+
+          <!-- vapor -->
+          <path d="M330 275 C320 250 345 240 335 210" stroke="#fff" stroke-width="3" fill="none" opacity=".16" stroke-linecap="round"/>
+          <path d="M362 270 C372 245 348 235 358 205" stroke="#fff" stroke-width="3" fill="none" opacity=".12" stroke-linecap="round"/>
+
+          <!-- caneca de trás -->
+          <ellipse cx="129" cy="376" rx="62" ry="12" fill="#000" opacity=".4" filter="url(#mugSoft)"/>
+          <use href="#mugShape" x="60" y="212" width="138" height="161"/>
+
+          <!-- caneca da frente -->
+          <ellipse cx="357" cy="474" rx="105" ry="17" fill="#000" opacity=".45" filter="url(#mugSoft)"/>
+          <use href="#mugShape" x="255" y="240" width="205" height="239"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -428,10 +485,10 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
       <div>
         <div class="eyebrow">Vamos gravar</div>
         <h2>Reserve sua data<br>no <span class="hl">RAWS Estúdio.</span></h2>
-        <p class="lead">Atendemos 1 cliente por dia. Deixe seus dados ou chame direto no WhatsApp — respondemos rápido.</p>
+        <p class="lead">Deixe seus dados ou chame direto no WhatsApp — respondemos rápido.</p>
         <div class="waline">
           <a data-wa="Olá! Vim pelo site do RAWS e quero agendar minha gravação."><b>WhatsApp:</b> chamar agora</a>
-          <a id="ig-link" target="_blank"><b>Instagram:</b> <span id="ig-handle">@raws.podcast</span></a>
+          <a id="ig-link" target="_blank"><b>Instagram:</b> <span id="ig-handle">@estudioraws</span></a>
           <span style="color:var(--muted);">📍 Joinville / SC</span>
         </div>
       </div>
@@ -479,8 +536,8 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
 /*   [ EDITAR AQUI ]  — número do WhatsApp e Instagram             */
 /*   Número no formato internacional, só dígitos: 55 + DDD + número */
 /* ============================================================= */
-const WHATSAPP = "5547999990000";          // <-- troque pelo seu número
-const INSTAGRAM = "raws.podcast";           // <-- troque pelo seu @ (sem o @)
+const WHATSAPP = "5547997198877";          // <-- troque pelo seu número
+const INSTAGRAM = "estudioraws";            // <-- troque pelo seu @ (sem o @)
 
 /* --- monta todos os links de WhatsApp --- */
 document.querySelectorAll("[data-wa]").forEach(el=>{
