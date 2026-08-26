@@ -80,6 +80,10 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
     radial-gradient(900px 520px at 10% 110%,rgba(127,224,208,.07),transparent 60%),
     linear-gradient(168deg,var(--blue-2) 0%,var(--blue) 46%,var(--blue-deep) 100%);}
 .hero-grid{display:grid;grid-template-columns:1fr;gap:24px;}
+.hero-top{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;}
+@media(min-width:900px){.hero-top{grid-template-columns:1.1fr .9fr;gap:36px;}}
+.hero-photo img{width:100%;display:block;border-radius:20px;border:1px solid rgba(174,196,240,.18);
+  box-shadow:0 20px 50px rgba(0,0,0,.35);}
 .hero h1{font-family:var(--disp);font-weight:800;letter-spacing:-1.4px;line-height:1.02;
   font-size:clamp(34px,8vw,68px);margin-top:14px;}
 .hero .sub{font-size:clamp(16px,2.4vw,21px);color:var(--muted);margin-top:16px;max-width:620px;}
@@ -283,15 +287,18 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
     <span style="animation-delay:.26s"></span><span style="animation-delay:.06s"></span><span style="animation-delay:.38s"></span>
   </div>
   <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Estúdio de Podcast · Joinville/SC</div>
-      <h1>1 hora de estúdio.<br><span class="hl">1 mês de conteúdo.</span></h1>
-      <p class="sub">Grave seu podcast e saia com os cortes prontos pra postar. Você fala <b>uma hora</b> — do resto a gente cuida.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" data-wa="Olá! Vim pelo site do RAWS e quero agendar minha data de gravação.">Agende sua data →</a>
-        <a class="btn btn-ghost" data-wa="Olá! Vim pelo site do RAWS e queria tirar algumas dúvidas.">Fale com um humano</a>
+    <div class="hero-top">
+      <div>
+        <div class="eyebrow">Estúdio de Podcast · Joinville/SC</div>
+        <h1>1 hora de estúdio.<br><span class="hl">1 mês de conteúdo.</span></h1>
+        <p class="sub">Grave seu podcast e saia com os cortes prontos pra postar. Você fala <b>uma hora</b> — do resto a gente cuida.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" data-wa="Olá! Vim pelo site do RAWS e quero agendar minha data de gravação.">Agende sua data →</a>
+          <a class="btn btn-ghost" data-wa="Olá! Vim pelo site do RAWS e queria tirar algumas dúvidas.">Fale com um humano</a>
+        </div>
+        <div class="trust"><span class="dot"></span> Agenda limitada.</div>
       </div>
-      <div class="trust"><span class="dot"></span> Agenda limitada.</div>
+      <div class="hero-photo"><img src="assets/estudio.png" alt="Bancada do estúdio RAWS Podcast, com microfones e a logo RAWS na TV ao fundo"></div>
     </div>
 
     <!-- [ EDITAR PREÇOS/CORTES AQUI ] -->
