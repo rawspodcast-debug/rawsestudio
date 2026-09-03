@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RAWS Estúdio — sitemap.xml
+  Site de página única: existe uma única URL indexável (a home).
+  Âncoras (#planos, #como, #servicos, #contato) NÃO entram aqui —
+  o Google as ignora em sitemaps e elas não são páginas separadas.
+  Ao publicar páginas novas (blog, /precos, etc.), adicione um
+  bloco <url> para cada uma e atualize o <lastmod>.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://raws.com.br/</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <image:image>
+      <image:loc>https://raws.com.br/assets/og-cover.jpg</image:loc>
+      <image:title>Estúdio de podcast RAWS em Joinville/SC</image:title>
+      <image:caption>Bancada do estúdio RAWS Podcast, com microfones e a logo RAWS na TV ao fundo.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://raws.com.br/assets/canecas.webp</image:loc>
+      <image:title>Canecas personalizadas RAWS Estúdio</image:title>
+      <image:caption>Canecas personalizadas com a marca do canal, brinde de temporada do RAWS Estúdio.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://raws.com.br/assets/raws-logo.webp</image:loc>
+      <image:title>Logo RAWS Estúdio</image:title>
+    </image:image>
+  </url>
+
+</urlset>

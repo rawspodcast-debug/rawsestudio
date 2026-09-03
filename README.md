@@ -4,9 +4,15 @@ Landing page estática (HTML/CSS/JS puro, sem build) pronta pra publicar na Verc
 
 ## Estrutura
 ```
-index.html          → o site inteiro (conteúdo + estilo + scripts)
-assets/raws-logo.png → logo RAWS
+index.html          → o site inteiro (conteúdo + estilo + scripts + dados estruturados)
+robots.txt          → libera a indexação e aponta o sitemap
+sitemap.xml         → mapa do site pro Google/Bing
+llms.txt            → resumo do negócio pras IAs (ChatGPT, Claude, Perplexity)
+assets/*.webp        → imagens que a página carrega (versões leves)
+assets/*.png         → originais, mantidos só como fonte
+assets/og-cover.jpg  → imagem da prévia no WhatsApp/Facebook (1200x630)
 assets/favicon.png   → ícone da aba
+tools/otimizar-imagens.py → regera os .webp a partir dos originais
 ```
 
 ## O que editar (rápido)
@@ -29,10 +35,34 @@ Abra o `index.html` e procure por `[ EDITAR ]`:
 3. Framework Preset: **Other** (é site estático, sem build). Deixe os campos de build vazios.
 4. **Deploy**. Pronto — a Vercel serve o `index.html` na raiz.
 
-## Domínio (www.rawsestudio.com.br)
-No painel do projeto na Vercel → **Settings → Domains** → adicione `rawsestudio.com.br` e `www.rawsestudio.com.br`. A Vercel mostra os registros DNS (um `A` e/ou `CNAME`) pra você apontar no seu provedor de domínio. O domínio continua registrado onde está — só o DNS aponta pra Vercel.
+## Domínio (raws.com.br)
+O site está no ar em **raws.com.br** e **www.raws.com.br**, com o DNS apontado pra Vercel (registro `A` `@` → `216.198.79.1`, `CNAME` `www` → `cname.vercel-dns.com`). O domínio segue registrado na Hostinger, que também continua hospedando o e-mail — os registros `MX` não foram tocados.
 
-> Atenção: se o e-mail @rawsestudio vem junto da hospedagem antiga, não cancele a hospedagem sem antes garantir o e-mail em outro lugar (os registros `MX` não mudam ao apontar o site pra Vercel, mas confirme).
+> Pendência de SEO: hoje o apex e o `www` respondem **200 os dois**, o que é conteúdo duplicado pro Google. Na Vercel → **Settings → Domains**, marque `www.raws.com.br` como *Redirect* pra `raws.com.br`. A tag `canonical` já cobre isso, mas o redirect resolve de vez.
 
 ## Marca d'água de build
 O rodapé mostra `build v1`. Ao subir uma versão nova, troque pra `build v2`, `v3`… pra confirmar visualmente que o deploy pegou.
+
+## SEO — o que já está no ar
+
+O domínio oficial é **https://raws.com.br** (o site também responde em `www.raws.com.br`).
+
+- `robots.txt` e `sitemap.xml` na raiz — envie o sitemap no [Google Search Console](https://search.google.com/search-console) e no [Bing Webmaster Tools](https://www.bing.com/webmasters).
+- `llms.txt` na raiz — resumo em texto do negócio, preços e contato, pras IAs citarem o RAWS corretamente.
+- No `index.html`: tag `canonical`, Open Graph completo (prévia bonita no WhatsApp) e um bloco **JSON-LD** com `LocalBusiness` + catálogo de ofertas.
+
+> **Ao mudar preço na página, mude também no JSON-LD** (procure `[ EDITAR ]` no `<head>`) e atualize o `llms.txt`. Preço divergente entre página e dados estruturados é penalizado pelo Google.
+
+## Imagens (importante pro Google)
+
+A página carrega **WebP** redimensionado pro tamanho real de exibição. Isso derrubou o peso de **5,6 MB pra 137 KB** — velocidade é fator de ranqueamento (Core Web Vitals), e a foto do topo é o que o Google cronometra como LCP.
+
+**Ao adicionar ou trocar uma foto:**
+
+1. Jogue o original (PNG ou JPG) em `assets/` com um nome que já esteja em `tools/otimizar-imagens.py` — ou adicione o nome novo no dicionário `ALVOS`, com a largura = 2× o tamanho que ele aparece na tela.
+2. Rode `python tools/otimizar-imagens.py` (precisa de `pip install pillow`).
+3. Aponte o `<img>` do `index.html` pro `.webp` gerado, com `width`, `height` e `loading="lazy"` (menos na foto do topo, que usa `fetchpriority="high"`).
+
+Os `.png` originais ficam no repositório de propósito, como fonte pra reprocessar. Eles não pesam na página — ninguém os baixa.
+
+> A prévia de link (`og-cover.jpg`) é gerada à parte, em **JPEG 1200×630** e sem os cantos arredondados. Não troque por WebP: nem todo scraper de link lê WebP.
