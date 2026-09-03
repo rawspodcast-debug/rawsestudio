@@ -66,3 +66,14 @@ A página carrega **WebP** redimensionado pro tamanho real de exibição. Isso d
 Os `.png` originais ficam no repositório de propósito, como fonte pra reprocessar. Eles não pesam na página — ninguém os baixa.
 
 > A prévia de link (`og-cover.jpg`) é gerada à parte, em **JPEG 1200×630** e sem os cantos arredondados. Não troque por WebP: nem todo scraper de link lê WebP.
+
+## Redirect do www (vercel.json)
+
+`www.raws.com.br` responde **308** para `raws.com.br`, preservando o caminho. Antes os dois hostnames devolviam 200, o que é conteúdo duplicado pro Google.
+
+Fica em `vercel.json` (versionado) em vez do painel da Vercel. Duas armadilhas encontradas na prática:
+
+- O `source` é `/(.*)` e **não** `/:path*`. Com `/:path*` os subcaminhos redirecionam mas a raiz `www.raws.com.br/` continua respondendo 200 — o padrão não casa com o caminho vazio.
+- `vercel.json` é JSON puro: não aceita comentários nem chaves fora do schema (um `"comment"` dentro do redirect faz o deploy falhar na validação).
+
+Ao trocar de domínio, atualize o `value` do `has.host` e o `destination`.
