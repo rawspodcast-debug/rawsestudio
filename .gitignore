@@ -1,0 +1,24 @@
+# ============================================================
+#  ATENÇÃO: tudo que está versionado aqui vai pro ar.
+#  A Vercel publica o repositório inteiro em raws.com.br,
+#  então arquivo commitado por engano fica acessível na web.
+# ============================================================
+
+# Prints e imagens soltas na raiz (ex.: prints do Search Console).
+# A barra inicial ancora na raiz: as imagens de assets/ NÃO são afetadas.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/*.gif
+
+# Arquivos temporários de teste (medição de layout, renders)
+/_*.html
+
+# Lixo de sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Cache local da CLI da Vercel
+.vercel/
