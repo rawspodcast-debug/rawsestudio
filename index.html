@@ -54,7 +54,7 @@
       "name": "RAWS Estúdio",
       "alternateName": "RAWS Podcast",
       "url": "https://raws.com.br/",
-      "description": "Estúdio de podcast em Joinville/SC. Você grava 1 hora e recebe os cortes verticais editados, prontos para Reels, TikTok e Shorts. Planos a partir de R$480.",
+      "description": "Estúdio de podcast em Joinville/SC. Você grava 1 hora e recebe os cortes verticais editados, prontos para Reels, TikTok e Shorts. Planos a partir de R$480. Atendimento sob agendamento.",
       "slogan": "1 hora de estúdio. 1 mês de conteúdo.",
       "image": "https://raws.com.br/assets/og-cover.jpg",
       "logo": "https://raws.com.br/assets/raws-logo.png",
@@ -64,7 +64,9 @@
       "paymentAccepted": "Pix, Cartão de crédito",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Rua Presidente Campos Salles, 558, sala 12",
         "addressLocality": "Joinville",
+        "postalCode": "89217-100",
         "addressRegion": "SC",
         "addressCountry": "BR"
       },
@@ -397,6 +399,8 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
 .contact .waline{margin-top:22px;display:flex;flex-direction:column;gap:10px;font-size:15.5px;}
 .contact .waline a{display:inline-flex;align-items:center;gap:10px;color:var(--ink);}
 .contact .waline a b{color:var(--yellow);}
+.contact .waline address{font-style:normal;color:var(--muted);line-height:1.5;}
+.contact .waline .hours{color:var(--muted);}
 .form{background:rgba(255,255,255,.05);border:1px solid var(--card-brd);border-radius:20px;padding:26px 24px;}
 .form label{display:block;font-size:13.5px;color:var(--muted);margin:14px 0 6px;font-weight:500;}
 .form label:first-child{margin-top:0;}
@@ -409,7 +413,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
 /* footer */
 footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,196,240,.12);}
 .foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center;}
-.foot-grid img{height:30px;}
+.foot-grid img{height:30px;width:auto;}
 .foot-links{display:flex;gap:22px;font-size:14px;color:var(--muted);flex-wrap:wrap;}
 .foot-links a:hover{color:var(--yellow);}
 .foot-meta{margin-top:22px;font-family:var(--mono);font-size:12px;color:var(--muted-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
@@ -633,7 +637,10 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
         <div class="waline">
           <a data-wa="Olá! Vim pelo site do RAWS e quero agendar minha gravação."><b>WhatsApp:</b> chamar agora</a>
           <a id="ig-link" target="_blank"><b>Instagram:</b> <span id="ig-handle">@estudioraws</span></a>
-          <span style="color:var(--muted);">📍 Joinville / SC</span>
+          <a href="tel:+5547997198877"><b>Telefone:</b> (47) 99719-8877</a>
+          <address>📍 Rua Presidente Campos Salles, 558 — sala 12<br>
+            Bairro Glória · Joinville/SC · CEP 89217-100</address>
+          <span class="hours">🗓️ Atendimento sob agendamento</span>
         </div>
       </div>
       <div class="form">
@@ -664,8 +671,8 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
       </div>
     </div>
     <div class="foot-meta">
-      <span>© <span id="ano"></span> RAWS Estúdio · Joinville/SC · raws.com.br</span>
-      <span>build v2</span>
+      <span>© <span id="ano"></span> RAWS Estúdio · Rua Presidente Campos Salles, 558, sala 12 · Glória · Joinville/SC · raws.com.br</span>
+      <span>build v3</span>
     </div>
   </div>
 </footer>
