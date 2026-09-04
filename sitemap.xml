@@ -4,22 +4,29 @@
   Site de página única: existe uma única URL indexável (a home).
   Âncoras (#planos, #como, #servicos, #contato) NÃO entram aqui —
   o Google as ignora em sitemaps e elas não são páginas separadas.
-  Ao publicar páginas novas (blog, /precos, etc.), adicione um
-  bloco <url> para cada uma e atualize o <lastmod>.
+  <changefreq> e <priority> foram removidos de propósito: o Google
+  declara publicamente que ignora os dois campos.
+  <lastmod> só vale se for a data real da última alteração do conteúdo —
+  atualize junto com a página, nunca a cada deploy.
+  Ao publicar páginas novas (blog, /precos, etc.), adicione um bloco <url>.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://raws.com.br/</loc>
-    <lastmod>2026-09-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-09-03</lastmod>
 
     <image:image>
       <image:loc>https://raws.com.br/assets/og-cover.jpg</image:loc>
       <image:title>Estúdio de podcast RAWS em Joinville/SC</image:title>
       <image:caption>Bancada do estúdio RAWS Podcast, com microfones e a logo RAWS na TV ao fundo.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://raws.com.br/assets/estudio2.webp</image:loc>
+      <image:title>Bancada de gravação do RAWS Estúdio</image:title>
+      <image:caption>Estúdio de gravação de podcast em vídeo em Joinville/SC, com bancada para até 4 pessoas.</image:caption>
     </image:image>
 
     <image:image>

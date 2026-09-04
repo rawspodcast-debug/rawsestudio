@@ -16,6 +16,8 @@
 <!-- ============================================================= -->
 
 <link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="theme-color" content="#092B75">
 
 <!-- ---------- SEO local (Joinville/SC) ---------- -->
 <meta name="geo.region" content="BR-SC">
@@ -56,9 +58,26 @@
       "url": "https://raws.com.br/",
       "description": "Estúdio de podcast em Joinville/SC. Você grava 1 hora e recebe os cortes verticais editados, prontos para Reels, TikTok e Shorts. Planos a partir de R$480. Atendimento sob agendamento.",
       "slogan": "1 hora de estúdio. 1 mês de conteúdo.",
-      "image": "https://raws.com.br/assets/og-cover.jpg",
-      "logo": "https://raws.com.br/assets/raws-logo.png",
+      "image": [
+        "https://raws.com.br/assets/og-cover.jpg",
+        "https://raws.com.br/assets/estudio2.webp",
+        "https://raws.com.br/assets/canecas.webp"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://raws.com.br/assets/raws-logo.png",
+        "width": 682,
+        "height": 216
+      },
       "telephone": "+55-47-99719-8877",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+55-47-99719-8877",
+        "url": "https://wa.me/5547997198877",
+        "availableLanguage": "pt-BR",
+        "areaServed": "BR"
+      },
       "priceRange": "R$ 480 - R$ 1.200",
       "currenciesAccepted": "BRL",
       "paymentAccepted": "Pix, Cartão de crédito",
@@ -93,6 +112,7 @@
           {
             "@type": "Offer",
             "name": "Plano Essencial",
+            "url": "https://raws.com.br/#planos",
             "description": "1 hora de gravação em estúdio + 5 cortes verticais editados.",
             "price": "480",
             "priceCurrency": "BRL",
@@ -107,6 +127,7 @@
           {
             "@type": "Offer",
             "name": "Plano Presença",
+            "url": "https://raws.com.br/#planos",
             "description": "1 hora de gravação em estúdio + 8 cortes verticais editados. O plano mais pedido.",
             "price": "520",
             "priceCurrency": "BRL",
@@ -121,6 +142,7 @@
           {
             "@type": "Offer",
             "name": "Plano Autoridade",
+            "url": "https://raws.com.br/#planos",
             "description": "1 hora de gravação em estúdio + 10 cortes verticais editados.",
             "price": "620",
             "priceCurrency": "BRL",
@@ -185,6 +207,7 @@
       "name": "Estúdio de Podcast em Joinville/SC | RAWS Estúdio",
       "description": "Estúdio de podcast em Joinville/SC para empresas e profissionais liberais. Grave 1 hora e receba os cortes prontos pra postar.",
       "inLanguage": "pt-BR",
+      "dateModified": "2026-09-03",
       "isPartOf": { "@id": "https://raws.com.br/#site" },
       "about": { "@id": "https://raws.com.br/#estudio" },
       "primaryImageOfPage": "https://raws.com.br/assets/og-cover.jpg"
@@ -198,6 +221,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* título lido por leitores de tela e pelo Google, invisível na tela */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 :root{
   --blue:#092B75;
   --blue-2:#0A2E7A;
@@ -392,7 +417,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
 .eco{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(min-width:760px){.eco{grid-template-columns:repeat(5,1fr);}}
 .eco .item{background:var(--card);border:1px solid var(--card-brd);border-radius:14px;padding:20px 16px;text-align:center;}
-.eco .item h4{font-family:var(--disp);font-weight:700;font-size:15px;}
+.eco .item h3{font-family:var(--disp);font-weight:700;font-size:15px;}
 .eco .item span{display:block;margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--muted-2);letter-spacing:.5px;}
 
 /* contact */
@@ -441,8 +466,8 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
 <!-- ===================== HEADER ===================== -->
 <header>
   <div class="wrap nav">
-    <a href="" class="logo"><img src="assets/raws-logo.webp" alt="RAWS Podcast" width="682" height="216"></a>
-    <nav>
+    <a href="/" class="logo" aria-label="RAWS Estúdio — início"><img src="assets/raws-logo.webp" alt="Raws Estúdio de Podcast" width="682" height="216"></a>
+    <nav aria-label="Navegação principal">
       <a href="#planos">Planos</a>
       <a href="#como">Como funciona</a>
       <a href="#servicos">Serviços</a>
@@ -451,6 +476,8 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
     <a class="btn btn-primary head-cta" data-wa="Olá! Vim pelo site do RAWS e quero agendar minha gravação.">WhatsApp</a>
   </div>
 </header>
+
+<main>
 
 <!-- ===================== HERO / PLANOS ===================== -->
 <section class="hero" id="topo">
@@ -480,6 +507,7 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
     </div>
 
     <!-- [ EDITAR PREÇOS/CORTES AQUI ] -->
+    <h2 class="sr-only">Planos e preços do estúdio</h2>
     <div class="plans" id="planos">
       <div class="plan">
         <h3>Essencial</h3>
@@ -622,11 +650,11 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
       <h2>Mais do que um estúdio.</h2>
     </div>
     <div class="eco">
-      <div class="item"><h4>Rádio RAWS</h4><span>Em breve</span></div>
-      <div class="item"><h4>Monte seu Estúdio</h4><span>Consultoria</span></div>
-      <div class="item"><h4>RAWS Club</h4><span>Comunidades</span></div>
-      <div class="item"><h4>Recicla Livros</h4><span>Em breve</span></div>
-      <div class="item"><h4>RAWS I.A.</h4><span>Automações</span></div>
+      <div class="item"><h3>Rádio RAWS</h3><span>Em breve</span></div>
+      <div class="item"><h3>Monte seu Estúdio</h3><span>Consultoria</span></div>
+      <div class="item"><h3>RAWS Club</h3><span>Comunidades</span></div>
+      <div class="item"><h3>Recicla Livros</h3><span>Em breve</span></div>
+      <div class="item"><h3>RAWS I.A.</h3><span>Automações</span></div>
     </div>
   </div>
 </section>
@@ -663,11 +691,13 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
   </div>
 </section>
 
+</main>
+
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <img src="assets/raws-logo.webp" alt="RAWS Podcast" width="682" height="216" loading="lazy" decoding="async">
+      <img src="assets/raws-logo.webp" alt="Raws Estúdio de Podcast" width="682" height="216" loading="lazy" decoding="async">
       <div class="foot-links">
         <a href="#planos">Planos</a>
         <a href="#como">Como funciona</a>
