@@ -91,7 +91,7 @@ Dá. Os LEDs assumem a cor da sua comunicação visual e a sua logo entra na tel
 Sim. A transmissão precisa ser solicitada no ato do agendamento, para fazermos as configurações necessárias.
 
 **Tem pacote para vários episódios?**
-Tem. A partir de 5 episódios você fecha um pacote com 10% de desconto à vista, e acima disso montamos a condição conforme a quantidade de episódios.
+Tem. A partir de 5 episódios você fecha um pacote e paga à vista com 10% de desconto. O percentual é o mesmo para qualquer quantidade a partir de 5.
 
 **Quais as formas de pagamento? Emitem nota fiscal?**
 Pix e/ou cartão de crédito. Sim, emitimos NF-e.
