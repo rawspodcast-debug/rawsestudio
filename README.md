@@ -32,7 +32,9 @@ Ao resolver conflito, **preserve a edição feita no GitHub** — ela é intenci
 
 ## Marca d'água de build
 
-O rodapé mostra `build v8`. Ao subir uma versão nova, incremente (`v9`, `v10`…) — é assim que se confirma que o deploy pegou, e não uma versão em cache.
+O rodapé mostra `build vN` (hoje `v9`). Ao subir uma versão nova, incremente — é assim que se confirma que o deploy pegou, e não uma versão em cache.
+
+Fácil de esquecer: quatro deploys seguidos saíram em 04/09/2026 sem incrementar. Se o número não bate com o que você espera, provavelmente foi isso, não cache.
 
 ---
 
@@ -51,7 +53,7 @@ Abra o `index.html` e procure por `[ EDITAR ]`:
 
 3. **Textos** — é HTML normal, edite direto entre as tags.
 
-> **Ao mudar preço, mude em três lugares:** o texto da página, o bloco JSON-LD no `<head>` e o `llms.txt`. Preço divergente entre a página e os dados estruturados é violação das diretrizes do Google.
+> **Ao mudar preço, mude em quatro lugares:** o texto da página (cards dos planos *e* a seção "Condições"), o bloco JSON-LD no `<head>`, a resposta da FAQ que cita os três valores, e o `llms.txt`. Preço divergente entre a página e os dados estruturados é violação das diretrizes do Google.
 
 ---
 
@@ -62,7 +64,7 @@ Abra o `index.html` e procure por `[ EDITAR ]`:
 | arquivo | o que faz |
 |---|---|
 | `robots.txt` | libera tudo, inclusive os robôs de IA (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot). Aponta o sitemap. |
-| `sitemap.xml` | uma URL só — o site é página única. Âncoras (`#planos`, `#como`) **não** entram: o Google as ignora em sitemaps. Inclui as imagens principais com título e legenda. |
+| `sitemap.xml` | uma URL só — o site é página única. Âncoras (`#planos`, `#como`) **não** entram: o Google as ignora em sitemaps. Inclui as imagens principais com título e legenda, apontando pros `.webp` que a página realmente carrega. Sem `changefreq` nem `priority`: o Google declara publicamente que ignora os dois. O `lastmod` só vale se for a data real da alteração — carimbar a data do deploy a cada build faz o Google ignorar o campo inteiro. |
 | `llms.txt` | resumo em Markdown do negócio, planos, preços, endereço e contato. É o que decide o que o ChatGPT/Claude respondem sobre o RAWS. |
 
 ### No `<head>` do `index.html`
@@ -70,7 +72,44 @@ Abra o `index.html` e procure por `[ EDITAR ]`:
 - `canonical` apontando pro apex
 - `robots` com `max-image-preview:large`
 - Open Graph e Twitter Card completos, com `og-cover.jpg` própria
-- **JSON-LD** com `LocalBusiness` + `WebSite` + `WebPage`, incluindo endereço, telefone, `geo`, `priceRange` e um `hasOfferCatalog` com os 3 planos e os 3 serviços avulsos
+- **JSON-LD** num `@graph` de três nós: `LocalBusiness`+`ProfessionalService`, `WebSite`, e um `WebPage` que é **também `FAQPage`** (`"@type": ["WebPage","FAQPage"]`, com as 15 perguntas em `mainEntity`). Um nó só para a página, em vez de dois disputando a mesma URL.
+- No `LocalBusiness`: endereço, telefone, `contactPoint`, `geo`, `priceRange`, `logo` como `ImageObject` com dimensões, uma galeria em `image` e um `hasOfferCatalog` com os 3 planos e os 3 serviços avulsos
+
+### FAQ: as mesmas 15 perguntas em três arquivos
+
+A seção `#faq` usa `<details>/<summary>` nativo — sem JS, e o Google indexa conteúdo recolhido normalmente. O mesmo texto existe em **três lugares, e os três têm que concordar**:
+
+| onde | o quê |
+|---|---|
+| `index.html`, seção `#faq` | o texto visível pro usuário |
+| `index.html`, JSON-LD `mainEntity` | as mesmas 15 no `FAQPage` |
+| `llms.txt`, "Perguntas frequentes" | as mesmas 15, pras IAs |
+
+**Resposta no schema que não esteja visível na página é violação das diretrizes** — o Google trata como spam e pode aplicar ação manual. Ao editar uma resposta, edite as três.
+
+Para conferir que não divergiram:
+
+```bash
+python - <<'EOF'
+import io, re, json
+s = io.open("index.html", encoding="utf-8").read()
+l = io.open("llms.txt", encoding="utf-8").read()
+d = json.loads(re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', s, re.S).group(1))
+faq = [n for n in d["@graph"] if "FAQPage" in n["@type"]][0]
+ruins = [q["name"] for q in faq["mainEntity"]
+         if q["name"] not in s or q["acceptedAnswer"]["text"] not in s
+         or q["name"] not in l or q["acceptedAnswer"]["text"] not in l]
+print(ruins or "as %d batem nos três" % len(faq["mainEntity"]))
+EOF
+```
+
+> O `FAQPage` **não gera mais resultado rico**: o Google restringiu isso a sites de governo e saúde em 2023. O retorno é busca de cauda longa e as respostas do ChatGPT/Perplexity/Gemini, que o `robots.txt` libera de propósito. Não espere a sanfona na página de resultados.
+
+### Estrutura semântica (não "limpe" isso)
+
+- O conteúdo fica dentro de um `<main>`; header e footer, fora — de propósito.
+- A hierarquia de títulos não pula nível: `h1` → `h2` → `h3`. Os cards do ecossistema são `h3`, não `h4`, por isso.
+- **A seção de planos tem um `<h2 class="sr-only">` invisível.** O design vai direto do `h1` do topo pros `h3` dos planos, o que era salto de nível. A classe `.sr-only` esconde na tela e mantém o título pro leitor de tela e pro Google. Parece código morto — não é. Apagar reintroduz o salto.
 
 ### Alinhamento com o Google Meu Negócio
 
@@ -89,9 +128,13 @@ Ausente de propósito: `openingHoursSpecification` — o atendimento é sob agen
 - [Rich Results Test](https://search.google.com/test/rich-results?url=https%3A%2F%2Fraws.com.br%2F)
 - [Validador do schema.org](https://validator.schema.org/#url=https%3A%2F%2Fraws.com.br%2F) (mais rigoroso)
 
-### Pendente
+### Estado no Search Console
 
-- [ ] Enviar o sitemap no [Search Console](https://search.google.com/search-console) — cadastre como propriedade de **Domínio** (verificação por DNS na Hostinger), não "Prefixo de URL": a de domínio cobre apex e www de uma vez.
+Propriedade de **Domínio** (`sc-domain:raws.com.br`), **já verificada por DNS**. Por isso não existe meta tag `google-site-verification` no HTML, e não precisa existir. A verificação de domínio cobre apex, www, http e https de uma vez — "Prefixo de URL" não cobriria.
+
+Sitemap **enviado e processado, 1 URL descoberta** (correto: o site é de página única). **Não reenvie** — o Google revisita sozinho e reenviar não acelera nada. O único gesto útil depois de alterar o conteúdo é *Inspecionar URL* → `https://raws.com.br/` → **Solicitar indexação**. A cota diária é baixa; use na home e só.
+
+O sitemap de 2020, do site anterior que existiu neste domínio, já foi removido do Console. 404 de URLs desconhecidas nos relatórios são resquício dele — **deixe 404**. Redirecionar conteúdo morto em massa pra home o Google trata como soft 404, o que é pior que o 404 honesto.
 
 ---
 
