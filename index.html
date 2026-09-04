@@ -892,7 +892,7 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
         <p class="lead">Deixe seus dados ou chame direto no WhatsApp — respondemos rápido.</p>
         <div class="waline">
           <a data-wa="Olá! Vim pelo site do RAWS e quero agendar minha gravação."><b>WhatsApp:</b> chamar agora</a>
-          <a id="ig-link" target="_blank"><b>Instagram:</b> <span id="ig-handle">@estudioraws</span></a>
+          <a id="ig-link" target="_blank" rel="noopener"><b>Instagram:</b> <span id="ig-handle">@estudioraws</span></a>
           <a href="tel:+5547997198877"><b>Telefone:</b> (47) 99719-8877</a>
           <address>📍 Rua Presidente Campos Salles, 558 — sala 12<br>
             Bairro Glória · Joinville/SC · CEP 89217-100</address>
@@ -932,7 +932,7 @@ footer{background:var(--navy);padding:40px 0 30px;border-top:1px solid rgba(174,
     </div>
     <div class="foot-meta">
       <span>© <span id="ano"></span> RAWS Estúdio · Rua Presidente Campos Salles, 558, sala 12 · Glória · Joinville/SC · raws.com.br</span>
-      <span>build v9</span>
+      <span>build v10</span>
     </div>
   </div>
 </footer>
@@ -971,7 +971,12 @@ if(send){
     const n = document.getElementById("nome").value.trim();
     const e = document.getElementById("email").value.trim();
     const t = document.getElementById("tel").value.trim();
-    const msg = `Olá! Quero agendar uma gravação no RAWS.%0A%0ANome: ${n||"-"}%0AE-mail: ${e||"-"}%0ATelefone: ${t||"-"}`;
+    /* Cada valor digitado é codificado à parte. O %0A da quebra de linha fica
+       literal de propósito: codificar a mensagem inteira transformaria o % em
+       %25 e o WhatsApp mostraria "%0A" como texto em vez de pular linha. */
+    const enc = (v) => encodeURIComponent(v || "-");
+    const msg = `Olá! Quero agendar uma gravação no RAWS.%0A%0A`
+              + `Nome: ${enc(n)}%0AE-mail: ${enc(e)}%0ATelefone: ${enc(t)}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank","noopener");
   });
 }
