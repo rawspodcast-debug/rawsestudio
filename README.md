@@ -186,13 +186,26 @@ Ao trocar de domínio, atualize o `value` do `has.host` e o `destination`.
 ### Como testar depois de um deploy
 
 ```bash
-# o deploy pegou?
+# o deploy chegou na ORIGEM? (a query vira chave de cache nova e fura o edge)
+curl -s "https://raws.com.br/?cb=$RANDOM" | grep -o 'build v[0-9]*'
+
+# e o que o visitante recebe AGORA? pode estar atrás, servido do cache
 curl -s https://raws.com.br/ | grep -o 'build v[0-9]*'
 
 # o redirect cobre raiz E subcaminhos?
 curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://www.raws.com.br/
 curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://www.raws.com.br/llms.txt
 ```
+
+**Os dois primeiros comandos darem números diferentes não é bug.** O primeiro fala com a origem; o segundo pega o que o edge da Vercel tem em cache.
+
+| origem | edge | o que é |
+|---|---|---|
+| novo | novo | deploy no ar, nada a fazer |
+| novo | antigo | só cache velho no edge — revalida sozinho (em 04/09/2026 levou 15s). `curl -sI https://raws.com.br/` mostrando `X-Vercel-Cache: HIT` com `Age` alto é exatamente isso. |
+| antigo | antigo | **o deploy não saiu.** Aí sim vá olhar o painel da Vercel. |
+
+Sem o cache-bust os dois últimos casos são indistinguíveis, e dá pra perder um tempo caçando problema de deploy que não existe.
 
 Um 200 na raiz do `www` significa que o redirect quebrou.
 
